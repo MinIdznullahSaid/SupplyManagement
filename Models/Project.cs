@@ -1,13 +1,24 @@
-﻿namespace SupplyManagement.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace SupplyManagement.Models;
+
+[Table("tb_m_projects")]
+public class Project
 {
-    public class Project
-    {
-        public int Id { get; set; }
-        public string ProjectName { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public string Description { get; set; }
-        public bool IsOpenForBidding { get; set; }
-        public ICollection<Vendor> Vendors { get; set; }
-    }
+    [Key]
+    [Column("guid")]
+    public Guid Guid { get; set; }
+    [Column("project_name", TypeName = "nvarchar(100)")]
+    public string ProjectName { get; set; }
+    [Column("start_date")]
+    public DateTime StartDate { get; set; }
+    [Column("end_date")]
+    public DateTime EndDate { get; set; }
+    [Column("description", TypeName = "nvarchar(200)")]
+    public string Description { get; set; }
+    [Column("is_open_for_bidding")]
+    public bool IsOpenForBidding { get; set; }
+    public ICollection<Vendor> Vendors { get; set; } = new List<Vendor>();
 }
+

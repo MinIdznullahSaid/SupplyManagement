@@ -1,12 +1,23 @@
-﻿namespace SupplyManagement.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace SupplyManagement.Models;
+
+[Table("tb_tr_vendor_approvals")]
+public class VendorApproval
 {
-    public class VendorApproval
-    {
-        public int Id { get; set; }
-        public int VendorId { get; set; }
-        public int ApprovedByUserId { get; set; }
-        public DateTime ApprovalDate { get; set; }
-        public Vendor Vendor { get; set; }
-        public User ApprovedByUser { get; set; }
-    }
+    [Key]
+    [Column("guid")]
+    public Guid Guid { get; set; }
+    [Column("vendor_guid")]
+    public Guid VendorGuid { get; set; }
+    [Column("approved_by_user_guid")]
+    public Guid ApprovedByUserGuid { get; set; }
+    [Column("approval_date")]
+    public DateTime ApprovalDate { get; set; }
+    public Vendor Vendor { get; set; }
+    public User ApprovedByUser { get; set; }
+    public User User { get; set; }
+
 }
+

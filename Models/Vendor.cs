@@ -1,13 +1,27 @@
-﻿namespace SupplyManagement.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace SupplyManagement.Models;
+
+[Table("tb_m_vendors")]
+public class Vendor
 {
-    public class Vendor
-    {
-        public int Id { get; set; }
-        public int CompanyId { get; set; }
-        public string BusinessField { get; set; }
-        public string CompanyType { get; set; }
-        public bool IsApprovedByAdmin { get; set; }
-        public bool IsApprovedByLogisticsManager { get; set; }
-        public Company Company { get; set; }
-    }
+    [Key]
+    [Column("guid")]
+    public Guid Guid { get; set; }
+    [Column("company_guid")]
+    public Guid CompanyGuid { get; set; }
+    [Column("businees_field", TypeName = "nvarchar(20)")]
+    public string BusinessField { get; set; }
+    [Column("company_type", TypeName = "nvarchar(20)")]
+    public string CompanyType { get; set; }
+    [Column("is_approved_by_admin")]
+    public bool IsApprovedByAdmin { get; set; }
+    [Column("is_approved_by_manager")]
+    public bool IsApprovedByManager { get; set; }
+
+    public Company Company { get; set; }
+    public ICollection<Project> Projects { get; set; } = new List<Project>();
+    public ICollection<VendorApproval> VendorApprovals { get; set; }
 }
+
